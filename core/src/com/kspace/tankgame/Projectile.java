@@ -14,13 +14,16 @@ public class Projectile
 	public ModelInstance instance;
 	public float direction = 0;
 	public float velocity = 0;
-	public float life = 3;
+	public float life = 0;
+	public float damage = 0;
 
-	Projectile(Weapon parent, Vector2 position, Color color, Model mdl, float direction, float velocity)
+	Projectile(Weapon parent, Vector2 position, Color color, Model mdl, float direction, float velocity, float life, float damage)
 	{
 		this.parent = parent;
 		this.direction = direction;
 		this.velocity = velocity;
+		this.life = life;
+		this.damage = damage;
 		
 		instance = new ModelInstance(mdl);
 		instance.transform.setToRotation(0, 0, 1, direction);
@@ -39,6 +42,8 @@ public class Projectile
 		position.add(x, y);
 		
 		life -= Gdx.graphics.getDeltaTime();
+		
+		if (life <= 0) parent.despawn(this);
 		
 		instance.transform.setTranslation(position.x, position.y, 0);
 

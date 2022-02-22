@@ -16,18 +16,23 @@ import com.badlogic.gdx.utils.Array;
 
 public class Player
 {
-	public Sprite sprite;
-	public Sprite turret;
+	public Sprite sprite = new Sprite();
+	public Sprite turret = new Sprite();
 	public BoundingBox hitbox = new BoundingBox();
-	public Color color;
+	public Color color = new Color();
 	public Vector2 position = new Vector2();
-	public float rotation;
+	public float rotation = 0;
 	public float direction = 0;
 	public float velocity = 0;
 	public float health = 100;
 	public Array<Array<Weapon>> weapons = new Array<Array<Weapon>>();
 	public Array<ModelInstance> renderQueue = new Array<ModelInstance>();
 	public Array<ModelInstance> modelInstances = new Array<ModelInstance>();
+	
+	Player()
+	{
+		
+	}
 	
 	Player(AssetManager amgr, Color color)
 	{	
@@ -54,9 +59,11 @@ public class Player
 		w1.offset = 30;
 		w1.direction = 0;
 		w1.rotation = -w1.direction;
-		w1.muzzle = 256;
+		w1.muzzle = 600;
 		w1.reload = 0.2f;
 		w1.length = 64;
+		w1.lifespan = 3;
+		w1.damage = 5;
 		firegroup0.add(w1);
 		
 		/*Weapon w2 = new Weapon(this, cannon, proj);
@@ -106,19 +113,19 @@ public class Player
 		renderQueue.clear();
 	}
 	
-	public void checkIfHit(Array<Projectile> projectiles)
+	public void checkForHits(Array<Projectile> projectiles)
 	{
 		for (Projectile p : projectiles)
 		{
-			if (getImpact(p.position))
+			if (checkHit(p.position))
 			{
+				health -= p.damage;
 				p.parent.despawn(p);
-				health -= 1;
 			}
 		}
 	}
 	
-	public boolean getImpact(Vector2 loc)
+	public boolean checkHit(Vector2 loc)
 	{
 		return hitbox.contains(new Vector3(loc.x, 0, loc.y));
 	}
@@ -142,9 +149,7 @@ public class Player
 	
 	public void move(Map map, float target)
 	{
-		if ((velocity < target + 0.1) && (velocity > target - 0.1)) velocity = target;
-		else if (Math.round(target) == 0.0f) velocity += (target - velocity) / 10;
-		else velocity += (target - velocity) / 50;
+		velocity = lerp(velocity, target, 0.02f);
 		
 		float x = (float) Math.cos(Math.toRadians(direction + 90)) * velocity * Gdx.graphics.getDeltaTime();
 		float y = (float) Math.sin(Math.toRadians(direction + 90)) * velocity * Gdx.graphics.getDeltaTime();
@@ -176,4 +181,6 @@ public class Player
 			}
 		}
 	}
+	
+	protected float lerp(float x1, float x2, float lambda) {return (x1 * (1.0f - lambda)) + (x2 * lambda);}
 }

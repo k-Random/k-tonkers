@@ -17,7 +17,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class UIRenderer
 {
-	public BitmapFont font;
+	public BitmapFont font = new BitmapFont();
 	public String activeUILayer = "none";
 	public Array<Object> uiElements = new Array<Object>();
 	public JsonValue regionDefs;

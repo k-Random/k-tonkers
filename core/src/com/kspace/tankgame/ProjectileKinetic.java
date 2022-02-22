@@ -6,9 +6,9 @@ import com.badlogic.gdx.math.Vector2;
 
 public class ProjectileKinetic extends Projectile
 {
-	ProjectileKinetic(Weapon parent, Vector2 position, Color color, Model mdl, float direction, float velocity)
+	ProjectileKinetic(Weapon parent, Vector2 position, Color color, Model mdl, float direction, float velocity, float life, float damage)
 	{
-		super(parent, position, color, mdl, direction, velocity);
+		super(parent, position, color, mdl, direction, velocity, life, damage);
 	}
 
 	public void update()

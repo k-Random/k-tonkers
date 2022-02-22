@@ -14,14 +14,19 @@ public class Map
 	public Array<Sprite> tiles = new Array<Sprite>(); //Texture Sprite
 	public Vector2 position;
 	public Rectangle mapBox;
-	public int sizeX;
-	public int sizeY;
-	public int mapWidth;
-	public int mapHeight;
-	public int tileX;
-	public int tileY;
-	public int renderRadius;
+	public int sizeX = 0;
+	public int sizeY = 0;
+	public int mapWidth = 0;
+	public int mapHeight = 0;
+	public int tileX = 0;
+	public int tileY = 0;
+	public int renderRadius = 0;
 
+	Map()
+	{
+		
+	}
+	
 	Map(int sizeX, int sizeY)
 	{
 		this.sizeX = sizeX;

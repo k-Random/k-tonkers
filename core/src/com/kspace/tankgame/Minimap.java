@@ -22,6 +22,11 @@ public class Minimap
 	
 	private int borderThickness = 3;
 	
+	Minimap()
+	{
+		
+	}
+	
 	Minimap(Viewport viewport, Map grid, Player player)
 	{
 		this.viewport = viewport;

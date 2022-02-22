@@ -16,6 +16,8 @@ public class Weapon
 	public float reload = 0f;
 	public float timer = 0;
 	public float muzzle = 0;
+	public float lifespan = 0;
+	public float damage = 0;
 	public Model proj;
 	public Vector2 position = new Vector2();
 	public ModelInstance instance;
@@ -58,7 +60,7 @@ public class Weapon
 			float sx = (float) Math.cos(Math.toRadians(rot + 90)) * -length;
 			float sy = (float) Math.sin(Math.toRadians(rot + 90)) * -length;
 			Vector2 pos = new Vector2(this.position.x + sx, this.position.y + sy);
-			Projectile p = new ProjectileKinetic(this, pos, parent.color, proj, rot, muzzle);
+			Projectile p = new ProjectileKinetic(this, pos, parent.color, proj, rot, muzzle, lifespan, damage);
 			projectiles.add(p);
 			timer = reload;
 		}
