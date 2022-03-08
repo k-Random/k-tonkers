@@ -21,6 +21,7 @@ public class Player
 	public BoundingBox hitbox = new BoundingBox();
 	public Color color = new Color();
 	public Vector2 position = new Vector2();
+	public Vector2 velocityVector = new Vector2();
 	public float rotation = 0;
 	public float direction = 0;
 	public float velocity = 0;
@@ -153,6 +154,9 @@ public class Player
 		
 		float x = (float) Math.cos(Math.toRadians(direction + 90)) * velocity * Gdx.graphics.getDeltaTime();
 		float y = (float) Math.sin(Math.toRadians(direction + 90)) * velocity * Gdx.graphics.getDeltaTime();
+		
+		velocityVector.x = x;
+		velocityVector.y = y;
 		
 		if (map.mapBox.contains(position.x + x, position.y + y))
 		{

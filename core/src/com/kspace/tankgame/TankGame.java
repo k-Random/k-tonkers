@@ -65,7 +65,7 @@ public class TankGame extends ApplicationAdapter implements InputProcessor
 		
 		for (NPCEnemy e : entities)
 		{
-			e.position.y = 300;
+			e.position.y = 2000;
 			//e.weapons.get(0).get(0).damage = 1;
 		}
 		

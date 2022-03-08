@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Projectile
 {
 	public Vector2 position;
+	public Vector2 velocityOffset;
 	public Weapon parent;
 	public ModelInstance instance;
 	public float direction = 0;
@@ -24,6 +25,7 @@ public class Projectile
 		this.velocity = velocity;
 		this.life = life;
 		this.damage = damage;
+		this.velocityOffset = parent.parent.velocityVector;
 		
 		instance = new ModelInstance(mdl);
 		instance.transform.setToRotation(0, 0, 1, direction);
@@ -39,7 +41,7 @@ public class Projectile
 		float x = (float) Math.cos(Math.toRadians(direction + 90)) * -velocity * Gdx.graphics.getDeltaTime();
 		float y = (float) Math.sin(Math.toRadians(direction + 90)) * -velocity * Gdx.graphics.getDeltaTime();
 		
-		position.add(x, y);
+		position.add(x, y).add(velocityOffset);
 		
 		life -= Gdx.graphics.getDeltaTime();
 		
